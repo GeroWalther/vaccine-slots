@@ -6,6 +6,7 @@ const Login = ({navigation}) => {
   const [mobNumber, setMobNumber] = useState();
   const [pass, setPass] = useState();
   const src = require('../assets/Group.png');
+  const eye = require('../assets/eye.png');
   return (
     <View style={styles.flex}>
       <View style={styles.inputcon}>
@@ -24,6 +25,7 @@ const Login = ({navigation}) => {
             value={pass}
             onChangeText={setPass}
           />
+          <Image style={styles.imgeye} source={eye} />
         </View>
         <BlueBtn onPress={() => navigation.navigate('Location')}>
           Log in
@@ -110,5 +112,12 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontSize: 12,
     lineHeight: 16,
+  },
+  imgeye: {
+    height: 25,
+    width: 25,
+    position: 'absolute',
+    top: 92,
+    left: 291,
   },
 });
