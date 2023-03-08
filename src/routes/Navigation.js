@@ -19,6 +19,7 @@ const Nav = () => {
             height: 94,
             backgroundColor: '#E5E5E5',
             borderBottomWidth: 0,
+            borderBottomColor: 'transparent',
           },
           headerTitleStyle: {
             // fontFamily: 'Poppins',
