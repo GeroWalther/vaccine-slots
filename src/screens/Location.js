@@ -26,12 +26,12 @@ const Location = ({navigation}) => {
         <Tab.Screen
           name="PinCode"
           component={TabPinCode}
-          options={{title: 'Search by pin code'}}
+          options={{tabBarLabel: 'Search by pin'}}
         />
         <Tab.Screen
           name="TabByDistrict"
           component={TabByDistrict}
-          options={{title: 'Search by District'}}
+          options={{tabBarLabel: 'Search by District'}}
         />
       </Tab.Navigator>
     </>

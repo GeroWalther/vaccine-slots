@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   },
   vaccTxt: {
     fontWeight: 300,
+    left: 3,
     fontSize: 12,
     lineHeight: 18,
     color: '#262626',
