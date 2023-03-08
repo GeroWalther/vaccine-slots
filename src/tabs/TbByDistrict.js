@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     left: 38,
-    lettlerSpacing: 0.4,
+    // lettlerSpacing: 0.4,
   },
   txtInp2: {
     position: 'absolute',
