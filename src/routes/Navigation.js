@@ -28,7 +28,13 @@ const Nav = () => {
             lineHeight: 21,
           },
         }}>
-        <Stack.Screen name="Login" component={Login} options={{title: ''}} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            title: '',
+          }}
+        />
         <Stack.Screen
           name="Location"
           component={Location}
