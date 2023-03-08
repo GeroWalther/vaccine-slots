@@ -19,7 +19,7 @@ const Nav = () => {
             height: 94,
             backgroundColor: '#E5E5E5',
             borderBottomWidth: 0,
-            borderBottomColor: 'transparent',
+            borderBottomColor: 'transparent', //FIXME: Not working properly
           },
           headerTitleStyle: {
             // fontFamily: 'Poppins',
