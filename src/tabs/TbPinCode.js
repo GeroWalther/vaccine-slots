@@ -19,7 +19,7 @@ const TabPinCode = () => {
       style={styles.screen}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 160 : 140}>
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 160 : 180}>
       <View style={styles.flex}>
         <View style={styles.txtCon}>
           <Text style={styles.placeholder}>Pinecode</Text>
