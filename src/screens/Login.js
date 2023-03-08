@@ -1,16 +1,30 @@
 import {StyleSheet, View, Text, TextInput, Image} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import BlueBtn from '../ui/BlueBtn';
 
 const Login = ({navigation}) => {
+  const [mobNumber, setMobNumber] = useState();
+  const [pass, setPass] = useState();
   const src = require('../assets/Group.png');
   return (
     <View style={styles.flex}>
       <View style={styles.inputcon}>
         <Text style={styles.welcomeTxt}>Welcome</Text>
         <Text style={styles.vaccTxt}>vaccinator & verifier</Text>
-        <TextInput style={styles.txtInp} placeholder="Mobile Number" />
-        <TextInput style={styles.txtInp} placeholder="Password" />
+        <View style={styles.txtCon}>
+          <Text style={styles.placeholder}>Mobile Number</Text>
+          <TextInput
+            style={styles.txtInp}
+            value={mobNumber}
+            onChangeText={setMobNumber}
+          />
+          <Text style={styles.placeholder2}>Password</Text>
+          <TextInput
+            style={styles.txtInp2}
+            value={pass}
+            onChangeText={setPass}
+          />
+        </View>
         <BlueBtn onPress={() => navigation.navigate('Location')}>
           Log in
         </BlueBtn>
@@ -52,11 +66,49 @@ const styles = StyleSheet.create({
   },
   txtInp: {
     marginBottom: 24,
-    width: 326,
-    height: 54,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '84%',
+    height: 48,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.12)',
     borderRadius: 3,
     padding: 10,
+  },
+  txtInp2: {
+    position: 'absolute',
+    top: 80,
+    left: 0,
+    width: '84%',
+    height: 48,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.12)',
+    borderRadius: 3,
+    padding: 10,
+  },
+  txtCon: {
+    backgroundColor: '#20eb2045',
+    position: 'relative',
+    width: '100%',
+    height: 156,
+  },
+  placeholder: {
+    color: 'hsla(0, 0%, 0%, 0.6)',
+    position: 'absolute',
+    top: -8,
+    left: 10,
+    fontWeight: 400,
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  placeholder2: {
+    color: 'hsla(0, 0%, 0%, 0.6)',
+    position: 'absolute',
+    top: 72,
+    left: 10,
+    fontWeight: 400,
+    fontSize: 12,
+    lineHeight: 16,
   },
 });

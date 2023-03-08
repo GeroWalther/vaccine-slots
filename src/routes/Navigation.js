@@ -16,7 +16,6 @@ const Nav = () => {
         screenOptions={{
           headerTintColor: '#242424',
           headerStyle: {
-            height: 94,
             backgroundColor: '#E5E5E5',
             borderBottomWidth: 0,
             borderBottomColor: 'transparent', //FIXME: Not working properly
