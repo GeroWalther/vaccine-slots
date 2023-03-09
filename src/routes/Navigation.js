@@ -17,8 +17,6 @@ const Nav = () => {
           headerTintColor: '#242424',
           headerStyle: {
             backgroundColor: '#E5E5E5',
-            borderBottomWidth: 0,
-            borderBottomColor: 'transparent', //FIXME: Not working properly
           },
           headerTitleStyle: {
             // fontFamily: 'Poppins',
@@ -32,7 +30,7 @@ const Nav = () => {
           name="Login"
           component={Login}
           options={{
-            title: '',
+            headerShown: false,
           }}
         />
         <Stack.Screen
