@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   txtCon: {
-    backgroundColor: '#20eb2045',
     position: 'relative',
     width: '100%',
     height: 156,

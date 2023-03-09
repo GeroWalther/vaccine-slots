@@ -12,7 +12,6 @@ export default function BlueBtn({children, onPress}) {
 const styles = StyleSheet.create({
   back: {
     backgroundColor: '#014ED0',
-    paddingHorizontal: 141,
     paddingVertical: 15,
     width: 329,
     height: 50,

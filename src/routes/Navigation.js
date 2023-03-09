@@ -38,7 +38,14 @@ const Nav = () => {
           component={Location}
           options={{title: 'Change location'}}
         />
-        <Stack.Screen name="Select" component={Select} />
+        <Stack.Screen
+          name="Select"
+          component={Select}
+          options={{
+            title: 'Kottayam',
+            headerTitleStyle: {fontSize: 14},
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
