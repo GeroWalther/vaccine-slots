@@ -36,7 +36,9 @@ const Nav = () => {
         <Stack.Screen
           name="Location"
           component={Location}
-          options={{title: 'Change location'}}
+          options={{
+            title: 'Change location',
+          }}
         />
         <Stack.Screen
           name="Select"

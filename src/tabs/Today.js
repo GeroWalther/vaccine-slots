@@ -1,5 +1,5 @@
-import {Image, StyleSheet, Text, View, FlatList} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, FlatList, Switch} from 'react-native';
+import React, {useState} from 'react';
 import SearchResItem from '../ui/SearchResItem';
 import BlueBtn from '../ui/BlueBtn';
 
@@ -35,26 +35,35 @@ const data = [
 ];
 
 const Today = () => {
-  const toggle = require('../assets/toggle.png');
-
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
     <View style={styles.con}>
       <View style={styles.topcon}>
-        <View style={styles.tag}>
-          <Text style={styles.tagTx}>18+</Text>
+        <View style={styles.tp}>
+          <View style={styles.tag}>
+            <Text style={styles.tagTx}>18+</Text>
+          </View>
+          <View style={styles.tag}>
+            <Text style={styles.tagTx}>45+</Text>
+          </View>
+          <View style={styles.tag}>
+            <Text style={styles.tagTx}>Free</Text>
+          </View>
+          <View style={styles.tag}>
+            <Text style={styles.tagTx}>Paid</Text>
+          </View>
         </View>
-        <View style={styles.tag}>
-          <Text style={styles.tagTx}>45+</Text>
-        </View>
-        <View style={styles.tag}>
-          <Text style={styles.tagTx}>Free</Text>
-        </View>
-        <View style={styles.tag}>
-          <Text style={styles.tagTx}>Paid</Text>
-        </View>
-        <View style={styles.selectKnobcon}>
+        <View style={styles.tp2}>
           <Text style={styles.tagTx}>First Dose</Text>
-          <Image source={toggle} style={styles.track} />
+          <Switch
+            style={styles.switch}
+            trackColor={{false: '#767577', true: '#f7f7f7'}}
+            thumbColor={isEnabled ? '#34c96b' : '#f5f5f5'}
+            ios_backgroundColor="#cacaca"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
         </View>
       </View>
       <FlatList
@@ -87,7 +96,7 @@ const styles = StyleSheet.create({
   tag: {
     backgroundColor: '#ffffff',
     paddingHorizontal: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 6,
     paddingVertical: 5,
     borderRadius: 12,
     justifyContent: 'center',
@@ -100,24 +109,20 @@ const styles = StyleSheet.create({
   },
   topcon: {
     flexDirection: 'row',
-
     alignItems: 'center',
-    marginVertical: 30,
+    marginVertical: 15,
   },
   flat: {
-    marginBottom: 30,
+    marginBottom: 15,
   },
-  selectKnobcon: {
-    alignItems: 'center',
+  switch: {marginLeft: 5, marginRight: 30, width: 30},
+  tp: {
     flexDirection: 'row',
-    marginLeft: 10,
-    marginRight: 60,
-    height: 25,
-    width: 50,
+    alignItems: 'center',
+    marginRight: 15,
   },
-  track: {
-    height: '100%',
-    width: '100%',
-    marginLeft: 5,
+  tp2: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

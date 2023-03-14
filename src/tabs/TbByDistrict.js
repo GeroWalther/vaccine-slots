@@ -1,26 +1,16 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Dimensions} from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BlueBtn from '../ui/BlueBtn';
+import AvoidKeyboard from '../ui/AvoidKeyboard';
+const windowHeight = Dimensions.get('screen').height;
 
 const TabByDistrict = () => {
   const navigation = useNavigation();
   const [state, setState] = useState();
   const [district, setDistrict] = useState();
   return (
-    <KeyboardAvoidingView
-      contentContainerStyle={styles.screen}
-      style={styles.screen}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      enabled
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 160 : 180}>
+    <AvoidKeyboard>
       <View style={styles.flex}>
         <View style={styles.txtCon}>
           <Text style={styles.placeholder}>State</Text>
@@ -40,14 +30,11 @@ const TabByDistrict = () => {
           Search
         </BlueBtn>
       </View>
-    </KeyboardAvoidingView>
+    </AvoidKeyboard>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
   flex: {
     flex: 1,
     alignItems: 'center',
@@ -57,12 +44,13 @@ const styles = StyleSheet.create({
   txtCon: {
     position: 'relative',
     width: '100%',
+    marginTop: windowHeight > 700 ? 20 : 0,
   },
   txtInp: {
     position: 'absolute',
     top: 27,
     left: 26,
-    width: '84%',
+    width: windowHeight > 700 ? '88%' : '86%',
     height: 54,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.12)',

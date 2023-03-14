@@ -1,12 +1,42 @@
-import {StyleSheet, View, Text, TextInput, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Image,
+  Dimensions,
+  Alert,
+} from 'react-native';
 import React, {useState} from 'react';
 import BlueBtn from '../ui/BlueBtn';
+const windowHeight = Dimensions.get('screen').height;
 
 const Login = ({navigation}) => {
-  const [mobNumber, setMobNumber] = useState();
+  const [mobNum, setMobNumber] = useState();
   const [pass, setPass] = useState();
   const src = require('../assets/Group.png');
   const eye = require('../assets/eye.png');
+
+  const isMobNumVal = () => {
+    const mobNumIsValid = mobNum.length >= 6;
+
+    if (mobNumIsValid) {
+      navigation.navigate('Location');
+    } else {
+      Alert.alert(
+        'Invalid Mobile Number',
+        'Please provide a valid mobile number with at least 6 digits or longer',
+        [
+          {
+            text: 'Ok',
+            onPress: () => console.log('Ok pressed'),
+          },
+        ],
+        {cancelable: false},
+      );
+    }
+  };
+
   return (
     <View style={styles.flex}>
       <View style={styles.inputcon}>
@@ -16,8 +46,10 @@ const Login = ({navigation}) => {
           <Text style={styles.placeholder}>Mobile Number</Text>
           <TextInput
             style={styles.txtInp}
-            value={mobNumber}
+            keyboardType="email-address"
+            value={mobNum}
             onChangeText={setMobNumber}
+            // ref={mobNumRef}
           />
           <Text style={styles.placeholder2}>Password</Text>
           <TextInput
@@ -27,9 +59,7 @@ const Login = ({navigation}) => {
           />
           <Image style={styles.imgeye} source={eye} />
         </View>
-        <BlueBtn onPress={() => navigation.navigate('Location')}>
-          Log in
-        </BlueBtn>
+        <BlueBtn onPress={isMobNumVal}>Log in</BlueBtn>
       </View>
       <Image style={styles.img} source={src} />
     </View>
@@ -37,6 +67,18 @@ const Login = ({navigation}) => {
 };
 
 export default Login;
+
+function dynamicHeight() {
+  if (windowHeight > 699 && windowHeight < 854) {
+    return 364;
+  }
+  if (windowHeight > 855) {
+    return 384;
+  }
+  if (windowHeight < 699) {
+    return '45%';
+  }
+}
 
 const styles = StyleSheet.create({
   flex: {
@@ -47,10 +89,11 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '100%',
-    height: 366.19,
+    height: dynamicHeight(),
+    aspectRatio: 1.1 / 1,
   },
   inputcon: {
-    marginBottom: 44,
+    marginBottom: windowHeight > 855 ? 50 : 10,
   },
   welcomeTxt: {
     fontWeight: 500,
@@ -65,25 +108,25 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: '#262626',
     letterSpacing: 0.4,
-    marginBottom: 45,
+    marginBottom: windowHeight > 700 ? 60 : 45,
   },
   txtInp: {
     marginBottom: 24,
     position: 'absolute',
     top: 0,
-    left: 0,
-    width: '84%',
+    left: windowHeight > 855 ? -18 : 0,
+    width: windowHeight > 700 ? '84%' : '88%',
     height: 48,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.12)',
     borderRadius: 3,
-    padding: 10,
+    paddingHorizontal: 15,
   },
   txtInp2: {
     position: 'absolute',
     top: 80,
-    left: 0,
-    width: '84%',
+    left: windowHeight > 855 ? -18 : 0,
+    width: windowHeight > 700 ? '84%' : '88%',
     height: 48,
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.12)',
@@ -94,6 +137,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: 156,
+    marginBottom: windowHeight > 850 ? 20 : 0,
   },
   placeholder: {
     color: 'hsla(0, 0%, 0%, 0.6)',

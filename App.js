@@ -5,7 +5,7 @@ import Nav from './src/routes/Navigation';
 function App() {
   return (
     <SafeAreaView style={styles.view}>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar barStyle={'dark-content'} backgroundColor="#E5E5E5" />
       <Nav />
     </SafeAreaView>
   );

@@ -1,5 +1,6 @@
-import {Pressable, Image, StyleSheet} from 'react-native';
+import {Pressable, Image, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
+const windowWidth = Dimensions.get('screen').width;
 
 export default function VerticalDotsBtn({onPress}) {
   const src = require('../assets/more-vertical.png');
@@ -15,6 +16,6 @@ const styles = StyleSheet.create({
     width: 24,
   },
   margin: {
-    marginLeft: 180,
+    marginLeft: windowWidth - 210,
   },
 });

@@ -1,6 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React from 'react';
 
+const windowWidth = Dimensions.get('screen').width;
 const SearchResItem = ({title, descr, color, color2, count, count2}) => {
   return (
     <View style={styles.con}>
@@ -30,10 +31,10 @@ const styles = StyleSheet.create({
   con: {
     backgroundColor: 'white',
     flex: 1,
-    width: 335,
+    width: windowWidth - 30,
     padding: 20,
     gap: 6,
-    marginBottom: 20,
+    marginBottom: 8,
   },
   boxes: {
     flexDirection: 'row',
