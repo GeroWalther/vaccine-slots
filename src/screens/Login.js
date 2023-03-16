@@ -9,20 +9,36 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import BlueBtn from '../ui/BlueBtn';
+import {useForm, Controller} from 'react-hook-form';
+
 const windowHeight = Dimensions.get('screen').height;
 
 const Login = ({navigation}) => {
-  const [mobNum, setMobNumber] = useState();
+  // const [mobNum, setMobNumber] = useState();
   const [pass, setPass] = useState();
+  const [err, setErr] = useState(false);
   const src = require('../assets/Group.png');
   const eye = require('../assets/eye.png');
 
-  const isMobNumVal = () => {
-    const mobNumIsValid = mobNum.length >= 6;
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      mobileNumber: '',
+      password: '',
+    },
+  });
+  const onSubmit = data => {
+    console.log(data);
+    // const mobNumIsValid = data.length >= 6;
+    // console.log(mobNumIsValid);
 
-    if (mobNumIsValid) {
+    if (data) {
       navigation.navigate('Location');
     } else {
+      setErr(true);
       Alert.alert(
         'Invalid Mobile Number',
         'Please provide a valid mobile number with at least 6 digits or longer',
@@ -44,22 +60,58 @@ const Login = ({navigation}) => {
         <Text style={styles.vaccTxt}>vaccinator & verifier</Text>
         <View style={styles.txtCon}>
           <Text style={styles.placeholder}>Mobile Number</Text>
-          <TextInput
-            style={styles.txtInp}
-            keyboardType="email-address"
-            value={mobNum}
-            onChangeText={setMobNumber}
-            // ref={mobNumRef}
+          {err && <Text style={styles.err}>{errors.message}</Text>}
+          <Controller
+            control={control}
+            rules={{
+              required: 'Mobile Number is required',
+              minLength: {
+                value: 6,
+                message: 'Number must be between 6 and 8 digits long',
+              },
+              maxLength: {
+                value: 8,
+                message: 'Number must be between 6 and 8 digits long',
+              },
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                style={styles.txtInp}
+                keyboardType="email-address"
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+            )}
+            name="mobileNumber"
           />
           <Text style={styles.placeholder2}>Password</Text>
-          <TextInput
-            style={styles.txtInp2}
-            value={pass}
-            onChangeText={setPass}
+          {err && <Text style={styles.err}>{errors.message}</Text>}
+          <Controller
+            control={control}
+            rules={{
+              required: 'Password is required',
+              minLength: {
+                value: 6,
+                message: 'Password must be at 6 to Characters long',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Password must be at max 10 to Characters long',
+              },
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                style={styles.txtInp2}
+                value={pass}
+                onChangeText={setPass}
+              />
+            )}
+            name="password"
           />
           <Image style={styles.imgeye} source={eye} />
         </View>
-        <BlueBtn onPress={isMobNumVal}>Log in</BlueBtn>
+        <BlueBtn onPress={handleSubmit(onSubmit)}>Log in</BlueBtn>
       </View>
       <Image style={styles.img} source={src} />
     </View>
@@ -163,5 +215,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 92,
     left: 291,
+  },
+  err: {
+    color: 'red',
   },
 });
