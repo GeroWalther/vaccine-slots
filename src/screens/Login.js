@@ -1,22 +1,12 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Image,
-  Dimensions,
-  Alert,
-} from 'react-native';
-import React, {useState} from 'react';
+import {StyleSheet, View, Text, Image, Dimensions} from 'react-native';
+import React from 'react';
 import BlueBtn from '../ui/BlueBtn';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
+import CustomInput from '../ui/CustomInput';
 
 const windowHeight = Dimensions.get('screen').height;
 
 const Login = ({navigation}) => {
-  // const [mobNum, setMobNumber] = useState();
-  const [pass, setPass] = useState();
-  const [err, setErr] = useState(false);
   const src = require('../assets/Group.png');
   const eye = require('../assets/eye.png');
 
@@ -24,33 +14,12 @@ const Login = ({navigation}) => {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm({
-    defaultValues: {
-      mobileNumber: '',
-      password: '',
-    },
-  });
-  const onSubmit = data => {
-    console.log(data);
-    // const mobNumIsValid = data.length >= 6;
-    // console.log(mobNumIsValid);
+  } = useForm();
 
-    if (data) {
-      navigation.navigate('Location');
-    } else {
-      setErr(true);
-      Alert.alert(
-        'Invalid Mobile Number',
-        'Please provide a valid mobile number with at least 6 digits or longer',
-        [
-          {
-            text: 'Ok',
-            onPress: () => console.log('Ok pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-    }
+  console.log(errors);
+
+  const onSubmit = data => {
+    navigation.navigate('Location');
   };
 
   return (
@@ -60,11 +29,14 @@ const Login = ({navigation}) => {
         <Text style={styles.vaccTxt}>vaccinator & verifier</Text>
         <View style={styles.txtCon}>
           <Text style={styles.placeholder}>Mobile Number</Text>
-          {err && <Text style={styles.err}>{errors.message}</Text>}
-          <Controller
+          {errors.mobileNumber && (
+            <Text style={styles.err}>{errors.mobileNumber.message}</Text>
+          )}
+          <CustomInput
             control={control}
+            name="mobileNumber"
             rules={{
-              required: 'Mobile Number is required',
+              required: true,
               minLength: {
                 value: 6,
                 message: 'Number must be between 6 and 8 digits long',
@@ -73,41 +45,31 @@ const Login = ({navigation}) => {
                 value: 8,
                 message: 'Number must be between 6 and 8 digits long',
               },
+              pattern: /^[0-9]*$/, // Only allow digits
             }}
-            render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-                style={styles.txtInp}
-                keyboardType="email-address"
-                value={value}
-                onBlur={onBlur}
-                onChangeText={onChange}
-              />
-            )}
-            name="mobileNumber"
+            stylesInput={styles.txtInp}
+            keyboardType="numeric"
           />
           <Text style={styles.placeholder2}>Password</Text>
-          {err && <Text style={styles.err}>{errors.message}</Text>}
-          <Controller
+          {errors.password && (
+            <Text style={styles.err2}>{errors.password.message}</Text>
+          )}
+          <CustomInput
             control={control}
+            name="password"
             rules={{
-              required: 'Password is required',
+              required: true,
               minLength: {
                 value: 6,
-                message: 'Password must be at 6 to Characters long',
+                message: 'Password must be at least 6 characters long',
               },
               maxLength: {
                 value: 10,
-                message: 'Password must be at max 10 to Characters long',
+                message: 'Password must be at max 10 to characters long',
               },
             }}
-            render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-                style={styles.txtInp2}
-                value={pass}
-                onChangeText={setPass}
-              />
-            )}
-            name="password"
+            stylesInput={styles.txtInp2}
+            secureTextEntry
           />
           <Image style={styles.imgeye} source={eye} />
         </View>
@@ -218,5 +180,10 @@ const styles = StyleSheet.create({
   },
   err: {
     color: 'red',
+    marginTop: 50,
+  },
+  err2: {
+    color: 'red',
+    marginTop: 130,
   },
 });
