@@ -15,7 +15,6 @@ const Login = ({navigation}) => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-
   console.log(errors);
 
   const onSubmit = data => {
