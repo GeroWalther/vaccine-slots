@@ -15,7 +15,7 @@ const CustomInput = ({
       <Controller
         control={control}
         name={name}
-        rules={{rules}}
+        rules={rules}
         render={({field: {value, onChange, onBlur}}) => (
           <TextInput
             style={stylesInput}

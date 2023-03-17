@@ -39,13 +39,16 @@ const Login = ({navigation}) => {
               required: true,
               minLength: {
                 value: 6,
-                message: 'Number must be between 6 and 8 digits long',
+                message: 'Must be a Number between 6 and 8 digits long',
               },
               maxLength: {
                 value: 8,
-                message: 'Number must be between 6 and 8 digits long',
+                message: 'Must be a Number between 6 and 8 digits long',
               },
-              pattern: /^[0-9]*$/, // Only allow digits
+              pattern: {
+                value: /^[0-9]*$/, // Only allow digits}
+                message: 'Must be a Number between 6 and 8 digits long',
+              },
             }}
             stylesInput={styles.txtInp}
             keyboardType="numeric"
@@ -58,7 +61,7 @@ const Login = ({navigation}) => {
             control={control}
             name="password"
             rules={{
-              required: true,
+              required: {value: true, message: 'Password required'},
               minLength: {
                 value: 6,
                 message: 'Password must be at least 6 characters long',
