@@ -27,30 +27,22 @@ const Login = ({navigation}) => {
         <Text style={styles.welcomeTxt}>Welcome</Text>
         <Text style={styles.vaccTxt}>vaccinator & verifier</Text>
         <View style={styles.txtCon}>
-          <Text style={styles.placeholder}>Mobile Number</Text>
-          {errors.mobileNumber && (
-            <Text style={styles.err}>{errors.mobileNumber.message}</Text>
+          <Text style={styles.placeholder}>Email</Text>
+          {errors.email && (
+            <Text style={styles.err}>{errors.email.message}</Text>
           )}
           <CustomInput
             control={control}
-            name="mobileNumber"
+            name="email"
             rules={{
               required: true,
-              minLength: {
-                value: 6,
-                message: 'Must be a Number between 6 and 8 digits long',
-              },
-              maxLength: {
-                value: 8,
-                message: 'Must be a Number between 6 and 8 digits long',
-              },
               pattern: {
-                value: /^[0-9]*$/, // Only allow digits}
-                message: 'Must be a Number between 6 and 8 digits long',
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // Email validation regex
+                message: 'Must be a valid email',
               },
             }}
             stylesInput={styles.txtInp}
-            keyboardType="numeric"
+            keyboardType="email-address"
           />
           <Text style={styles.placeholder2}>Password</Text>
           {errors.password && (
