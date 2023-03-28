@@ -10,7 +10,7 @@ const AvoidKeyboard = ({children}) => {
   const windowHeight = Dimensions.get('screen').height;
   const safeHeight = () => {
     if (windowHeight > 700) {
-      return 150;
+      return 135;
     }
     if (windowHeight < 700) {
       return 110;

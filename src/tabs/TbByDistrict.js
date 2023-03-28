@@ -1,31 +1,77 @@
-import {StyleSheet, View, Text, TextInput, Dimensions} from 'react-native';
-import React, {useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Dimensions,
+  Pressable,
+} from 'react-native';
+import React, {useState, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BlueBtn from '../ui/BlueBtn';
 import AvoidKeyboard from '../ui/AvoidKeyboard';
+import {Modalize} from 'react-native-modalize';
+// import CustomModal from '../ui/Modalize';
+import {useTheme} from '@shopify/restyle';
 const windowHeight = Dimensions.get('screen').height;
 
 const TabByDistrict = () => {
+  const theme = useTheme();
   const navigation = useNavigation();
   const [state, setState] = useState();
   const [district, setDistrict] = useState();
+
+  const modalizeRef = useRef(null);
+  const modalizeRef2 = useRef(null);
+
+  function onPressState() {
+    modalizeRef.current?.open();
+  }
+
+  function onPressDist() {
+    modalizeRef2.current?.open();
+  }
+
   return (
     <AvoidKeyboard>
-      <View style={styles.flex}>
+      <View
+        style={[styles.flex, {backgroundColor: theme.colors.mainBackgrdColor}]}>
         <View style={styles.txtCon}>
-          <Text style={styles.placeholder}>State</Text>
-          <TextInput
-            style={styles.txtInp}
-            value={state}
-            onChangeText={setState}
-          />
-          <Text style={[styles.placeholder, styles.pl2]}>District</Text>
-          <TextInput
-            style={[styles.txtInp, styles.txtInp2]}
-            value={district}
-            onChangeText={setDistrict}
-          />
+          <Pressable onPress={onPressState}>
+            <Text style={styles.placeholder}>State</Text>
+            <TextInput
+              style={styles.txtInp}
+              value={state}
+              onChangeText={setState}
+            />
+          </Pressable>
+          <Pressable onPress={onPressDist}>
+            <Text style={[styles.placeholder, styles.pl2]}>District</Text>
+            <TextInput
+              style={[styles.txtInp, styles.txtInp2]}
+              value={district}
+              onChangeText={setDistrict}
+            />
+          </Pressable>
         </View>
+        <Modalize
+          ref={modalizeRef}
+          HeaderComponent={<Text>States</Text>}
+          modalHeight={windowHeight / 1.35}
+          snapPoint={windowHeight / 1.35}>
+          <View>
+            <Text>a list of states</Text>
+          </View>
+        </Modalize>
+        <Modalize
+          ref={modalizeRef2}
+          HeaderComponent={<Text>District</Text>}
+          modalHeight={windowHeight / 1.35}
+          snapPoint={windowHeight / 1.35}>
+          <View>
+            <Text>a list of districts</Text>
+          </View>
+        </Modalize>
         <BlueBtn onPress={() => navigation.navigate('Select', {})}>
           Search
         </BlueBtn>
@@ -39,7 +85,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#E5E5E5',
   },
   txtCon: {
     position: 'relative',

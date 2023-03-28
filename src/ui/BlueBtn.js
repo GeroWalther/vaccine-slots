@@ -1,9 +1,13 @@
 import {StyleSheet, Text, Pressable} from 'react-native';
 import React from 'react';
+import {useTheme} from '@shopify/restyle';
 
 export default function BlueBtn({children, onPress}) {
+  const theme = useTheme();
   return (
-    <Pressable style={styles.back} onPress={onPress}>
+    <Pressable
+      style={[styles.back, {backgroundColor: theme.colors.BluBtn}]}
+      onPress={onPress}>
       <Text style={styles.txt}>{children}</Text>
     </Pressable>
   );
@@ -11,7 +15,6 @@ export default function BlueBtn({children, onPress}) {
 
 const styles = StyleSheet.create({
   back: {
-    backgroundColor: '#014ED0',
     paddingVertical: 15,
     width: 329,
     height: 50,

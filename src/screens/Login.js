@@ -35,7 +35,7 @@ const Login = ({navigation}) => {
             control={control}
             name="email"
             rules={{
-              required: true,
+              required: false,
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, // Email validation regex
                 message: 'Must be a valid email',
@@ -52,7 +52,7 @@ const Login = ({navigation}) => {
             control={control}
             name="password"
             rules={{
-              required: {value: true, message: 'Password required'},
+              required: {value: false, message: 'Password required'},
               minLength: {
                 value: 6,
                 message: 'Password must be at least 6 characters long',
