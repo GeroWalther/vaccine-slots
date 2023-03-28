@@ -57,8 +57,8 @@ const TabByDistrict = () => {
         <Modalize
           ref={modalizeRef}
           HeaderComponent={<Text>States</Text>}
-          modalHeight={windowHeight / 1.35}
-          snapPoint={windowHeight / 1.35}>
+          modalHeight={windowHeight / 1.4}
+          snapPoint={windowHeight / 2}>
           <View>
             <Text>a list of states</Text>
           </View>
