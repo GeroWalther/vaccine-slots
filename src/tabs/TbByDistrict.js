@@ -15,12 +15,10 @@ const TabByDistrict = () => {
   const modalizeRef2 = useRef(null);
 
   function onPressState() {
-    console.log('random Top');
     modalizeRef.current?.open();
   }
 
   function onPressDist() {
-    console.log('random bottom');
     modalizeRef2.current?.open();
   }
 
