@@ -1,8 +1,9 @@
 import {StyleSheet, Text} from 'react-native';
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {Modalize} from 'react-native-modalize';
 
-const CustomModal = ({children, ref, head, height, snap}) => {
+const CustomModal = forwardRef((props, ref) => {
+  const {children, head, height, snap} = props;
   return (
     <Modalize
       ref={ref}
@@ -12,7 +13,7 @@ const CustomModal = ({children, ref, head, height, snap}) => {
       {children}
     </Modalize>
   );
-};
+});
 
 export default CustomModal;
 
