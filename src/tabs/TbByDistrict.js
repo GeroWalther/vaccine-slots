@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import React, {useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BlueBtn from '../ui/BlueBtn';
@@ -6,7 +6,6 @@ import AvoidKeyboard from '../ui/AvoidKeyboard';
 import CustomModal from '../ui/CustomModal';
 import {useTheme} from '@shopify/restyle';
 import PressInput from '../ui/PressInput';
-const windowHeight = Dimensions.get('screen').height;
 
 const TabByDistrict = () => {
   const theme = useTheme();
@@ -37,18 +36,10 @@ const TabByDistrict = () => {
             District
           </PressInput>
         </View>
-        <CustomModal
-          ref={modalizeRef}
-          head={'States'}
-          height={windowHeight / 1.3}
-          snap={windowHeight / 2}>
+        <CustomModal ref={modalizeRef} head={'States'}>
           <Text>a list of states</Text>
         </CustomModal>
-        <CustomModal
-          ref={modalizeRef2}
-          head={'District'}
-          height={windowHeight / 1.3}
-          snap={windowHeight / 2}>
+        <CustomModal ref={modalizeRef2} head={'District'}>
           <Text>a list of districts</Text>
         </CustomModal>
         <BlueBtn onPress={() => navigation.navigate('Select', {})}>

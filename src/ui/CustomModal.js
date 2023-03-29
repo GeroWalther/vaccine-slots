@@ -1,15 +1,16 @@
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, Dimensions} from 'react-native';
 import React, {forwardRef} from 'react';
 import {Modalize} from 'react-native-modalize';
+const windowHeight = Dimensions.get('screen').height;
 
 const CustomModal = forwardRef((props, ref) => {
-  const {children, head, height, snap} = props;
+  const {children, head} = props;
   return (
     <Modalize
       ref={ref}
       HeaderComponent={<Text style={styles.head}>{head}</Text>}
-      modalHeight={height}
-      snapPoint={snap}>
+      modalHeight={windowHeight / 1.3}
+      snapPoint={windowHeight / 1.5}>
       {children}
     </Modalize>
   );
