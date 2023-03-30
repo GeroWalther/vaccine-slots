@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingVertical: 18,
-    borderBottomColor: '#c3c3c3',
+    borderBottomColor: '#bdbcbc',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   txt: {
