@@ -19,5 +19,8 @@ const CustomModal = forwardRef((props, ref) => {
 export default CustomModal;
 
 const styles = StyleSheet.create({
-  head: {fontweight: 'bold'},
+  head: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
