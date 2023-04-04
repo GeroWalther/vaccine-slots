@@ -13,17 +13,23 @@ const TabByDistrict = () => {
   const theme = useTheme();
   const navigation = useNavigation();
   const [stateList, setStateList] = useState();
+  const [selectedState, setSelectedState] = useState();
   const [districts, setDistricts] = useState();
+  const [selectedDistrict, setselectedDistrict] = useState();
 
   const modalizeRef = useRef(null);
   const modalizeRef2 = useRef(null);
 
-  function onStateSelect() {
-    console.log('state selected');
+  function onStateSelect(state) {
+    setSelectedState(state);
+    console.log(`selected state: ${state.state_id}`);
+    modalizeRef.current?.close();
   }
 
-  function onDistrictSelect() {
-    console.log('district selected');
+  function onDistrictSelect(district) {
+    setselectedDistrict(district);
+    console.log(`selected district: ${district.district_name}`);
+    modalizeRef2.current?.close();
   }
 
   async function onPressState() {
@@ -42,7 +48,7 @@ const TabByDistrict = () => {
     modalizeRef2.current?.open();
     try {
       const response = await axios.get(
-        'https://cdn-api.co-vin.in/api/v2/admin/location/districts/17',
+        `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${selectedState.state_id}`,
       );
       setDistricts(response.data.districts);
     } catch (err) {
@@ -68,7 +74,7 @@ const TabByDistrict = () => {
               data={stateList}
               renderItem={({item}) => (
                 <ModalContent
-                  onPress={onStateSelect}
+                  onPress={() => onStateSelect(item)}
                   content={item.state_name}
                 />
               )}
@@ -82,7 +88,7 @@ const TabByDistrict = () => {
               data={districts}
               renderItem={({item}) => (
                 <ModalContent
-                  onPress={onDistrictSelect}
+                  onPress={() => onDistrictSelect(item)}
                   content={item.district_name}
                 />
               )}
