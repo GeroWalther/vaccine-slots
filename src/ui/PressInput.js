@@ -6,19 +6,18 @@ import {
   TextInput,
   Dimensions,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 const width = Dimensions.get('screen').width;
 
-const PressInput = ({onPress, children, editable, style}) => {
-  const [state, setState] = useState();
+const PressInput = ({onPress, children, editable, style, value}) => {
   return (
     <Pressable onPress={onPress}>
       <View pointerEvents="none">
         <Text style={styles.placeholder}>{children}</Text>
         <TextInput
           style={[styles.txtInp, style]}
-          value={state}
-          onChangeText={setState}
+          value={value}
+          // onChangeText={setState}
           editable={editable}
         />
       </View>

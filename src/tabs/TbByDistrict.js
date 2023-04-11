@@ -12,33 +12,29 @@ import ModalContent from '../ui/ModalContent';
 const TabByDistrict = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const [stateList, setStateList] = useState();
-  const [selectedState, setSelectedState] = useState();
-  const [districts, setDistricts] = useState();
-  const [selectedDistrict, setselectedDistrict] = useState();
+  const [stateList, setStateList] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+  const [districts, setDistricts] = useState('');
+  const [selectedDistrict, setselectedDistrict] = useState('');
 
   const modalizeRef = useRef(null);
   const modalizeRef2 = useRef(null);
 
   function onStateSelect(state) {
     setSelectedState(state);
-    console.log(`selected state: ${state.state_id}`);
     modalizeRef.current?.close();
   }
 
   function onDistrictSelect(district) {
     setselectedDistrict(district);
-    console.log(`selected district: ${district.district_name}`);
     modalizeRef2.current?.close();
   }
 
   async function onPressState() {
     modalizeRef.current?.open();
     try {
-      const response = await axios.get(
-        'https://cdndemo-api.co-vin.in/api/v2/admin/location/states',
-      );
-      setStateList(response.data.states);
+      const response = await axios.get('http://localhost:4000/states/');
+      setStateList(response.data.data);
     } catch (err) {
       console.log('catch blog: ', err.message);
     }
@@ -48,23 +44,30 @@ const TabByDistrict = () => {
     modalizeRef2.current?.open();
     try {
       const response = await axios.get(
-        `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${selectedState.state_id}`,
+        `http://localhost:4000/districts/${selectedState.state_id}`,
       );
-      setDistricts(response.data.districts);
+      setDistricts(response.data.data);
     } catch (err) {
       console.log('catch blog: ', err.message);
     }
   }
-
+  // console.log(`outer log: ${selectedState.state_name}`);
+  // console.log(`outer log2: ${selectedDistrict.district_name}`);
   return (
     <AvoidKeyboard>
       <View
         style={[styles.flex, {backgroundColor: theme.colors.mainBackgrdColor}]}>
         <View style={styles.txtCon}>
-          <PressInput onPress={onPressState} editable={false}>
+          <PressInput
+            value={selectedState.state_name}
+            onPress={onPressState}
+            editable={false}>
             State
           </PressInput>
-          <PressInput onPress={onPressDist} editable={false}>
+          <PressInput
+            value={selectedDistrict.district_name}
+            onPress={onPressDist}
+            editable={false}>
             District
           </PressInput>
         </View>
